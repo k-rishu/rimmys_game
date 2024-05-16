@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Game</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #score {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #result {
+            font-size: 20px;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cricket Game</h1>
+    <p>Hit the ball and score 1, 2, 4, or 6 based on the distance.</p>
+    <p>Game ends when the score adds up to 50.</p>
+    <p>Score: <span id="score">0</span></p>
+    <button onclick="hitBall()">Score</button>
+    <button onclick="looseBall()">Loose</button>
+    <!-- <button onclick="hitBall(4)">Hit 4</button>
+    <button onclick="hitBall(6)">Hit 6</button> -->
+    <p id="result"></p>
+
+    <script>
+        let score = 0;
+
+        // function getRandomInt(min, max) {
+        //     min = Math.ceil(min); // Ensure the min is rounded up to the nearest whole number
+        //     max = Math.floor(max); // Ensure the max is rounded down to the nearest whole number
+        //     return Math.floor(Math.random() * (max - min + 1)) + min;
+        // }
+        let temp = getRandomInt(1, 10);
+
+        function looseBall() {
+            score -= Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+            document.getElementById("score").innerText = score;
+            
+            if (score >= 50 && score < 53) {
+                document.getElementById("result").innerText = "Congrats dear, you got to the clue! Now there are 9 more hurdles to get through. So go to the place without which no disease gets cured, see the supreme and ask, where is the clue?";
+                disableButtons();
+            } else if (score % 10 === 0) {
+                document.getElementById("result").innerText = "Try again!";
+            }
+        }
+
+        function hitBall() {
+            score += Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+            document.getElementById("score").innerText = score;
+            
+            if (score >= 50 && score < 53) {
+                document.getElementById("result").innerText = "Congrats dear, you got to the clue! Now there are 9 more hurdles to get through. So go to the place without which no disease gets cured, see the supreme and ask, where is the clue?";
+                disableButtons();
+            } else if (score % 10 === 0) {
+                document.getElementById("result").innerText = "Try again!";
+            }
+        }
+
+        function disableButtons() {
+            document.querySelectorAll("button").forEach(button => {
+                button.disabled = true;
+            });
+        }
+    </script>
+</body>
+</html>
