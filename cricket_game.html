@@ -7,28 +7,47 @@
     <style>
         body {
             text-align: center;
+            background-image: url('./photos/background.jpeg'); /* Path to your background image */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat;
         }
         #score {
             font-size: 24px;
             margin-bottom: 20px;
         }
         #result {
-            font-size: 20px;
-            color: green;
-            margin-top: 20px;
+            width: 500;
+            height: 600px;
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat;
         }
+        #btn{
+            width: 70px;
+            height: 40px;
+            background-color: bisque;
+            border-radius: 20%;
+            padding: 5px;
+            margin: 10px;
+            font-size: large;
+        }
+        #para{
+            font-size: 20px;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Cricket Game</h1>
-    <p>Hit the ball and score 1, 2, 4, or 6 based on the distance.</p>
-    <p>Game ends when the score adds up to 50.</p>
-    <p>Score: <span id="score">0</span></p>
-    <button onclick="hitBall()">Score</button>
-    <button onclick="looseBall()">Loose</button>
-    <!-- <button onclick="hitBall(4)">Hit 4</button>
-    <button onclick="hitBall(6)">Hit 6</button> -->
-    <p id="result"></p>
+    <h1>Weclome to TriCruzon</h1>
+    <p id="para">To Get the Clue hit the score to 50.</p>
+    <p id="para">Game ends when the score adds up to 50.</p>
+    <p id="para">Score: <span id="score">0</span></p>
+    <div>
+    <button id="btn" onclick="disableButton(this), scoreWithDealy()">Score</button>
+    <button id="btn" onclick="disableButton(this), looseWithDealy()">Loose</button>
+    </div>
+    <img id="result"></img>
 
     <script>
         let score = 0;
@@ -40,24 +59,41 @@
         // }
         let temp = getRandomInt(1, 10);
 
+        function disableButton(btn) {
+            btn.disabled = true; // Disable the button
+            setTimeout(function() {
+                btn.disabled = false; // Re-enable the button after 2 seconds
+            }, 2000);
+        }
+
+        function scoreWithDealy(){
+            setTimeout(hitBall, 2000);
+        }
+
+        function looseWithDealy(){
+            setTimeout(looseBall, 2000);
+        }
+
         function looseBall() {
+            
             score -= Math.floor(Math.random() * (10 - 1 + 1)) + 1;
             document.getElementById("score").innerText = score;
             
-            if (score >= 50 && score < 53) {
-                document.getElementById("result").innerText = "Congrats dear, you got to the clue! Now there are 9 more hurdles to get through. So go to the place without which no disease gets cured, see the supreme and ask, where is the clue?";
+            if (score === 50) {
+                document.getElementById("result").src = './photos/answer.jpg';
                 disableButtons();
             } else if (score % 10 === 0) {
                 document.getElementById("result").innerText = "Try again!";
             }
+            
         }
 
         function hitBall() {
             score += Math.floor(Math.random() * (10 - 1 + 1)) + 1;
             document.getElementById("score").innerText = score;
             
-            if (score >= 50 && score < 53) {
-                document.getElementById("result").innerText = "Congrats dear, you got to the clue! Now there are 9 more hurdles to get through. So go to the place without which no disease gets cured, see the supreme and ask, where is the clue?";
+            if (score === 50) {
+                document.getElementById("result").src = './photos/answer.jpg';
                 disableButtons();
             } else if (score % 10 === 0) {
                 document.getElementById("result").innerText = "Try again!";
